@@ -14,14 +14,14 @@ EMAKE := $(EENVS) emacs -batch -l emake.el --eval "(emake (pop argv))"
 
 # Instruct Make on how to create `emake.el'
 emake.el:
-	wget 'https://raw.githubusercontent.com/vermiculus/emake.el/master/emake.el'
+	curl -OL 'https://raw.githubusercontent.com/vermiculus/emake.el/master/emake.el'
 
 # Instruct Make on how to create `emacs-travis.mk'
 emacs-travis.mk:
-	wget 'https://raw.githubusercontent.com/flycheck/emacs-travis/master/emacs-travis.mk'
+	curl -OL 'https://raw.githubusercontent.com/flycheck/emacs-travis/master/emacs-travis.mk'
 
 # Teach Make that '.elpa/' is created by `(emake "install")'
-.elpa/:
+.elpa/: emake.el
 	$(EMAKE) install
 
 ## Phony targets
